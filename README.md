@@ -21,6 +21,7 @@ Before you get started, you will need the following:
 ## Table of Contents
 - [Apache Spark](#apache-spark)
    - [Setup Spark on K8s](#setup-spark-on-k8s)
+   - [Run Spark Jobs with MinIO as Object Storage](#run-spark-jobs-with-minio-as-object-storage)
 
 
 ## Apache Spark
@@ -36,6 +37,8 @@ In this section we will cover
 ### Setup Spark on k8s
 To run spark jobs on kubernetes we will use [spark-operator](https://github.com/GoogleCloudPlatform/spark-on-k8s-operator). You can follow the complete walkthrough [here](spark/setup-spark-operator.md) or use the [notebook](spark/setup-spark-operator.ipynb)
 
+### Run Spark Jobs with MinIO as Object Storage
+Reading and writing data from and to MinIO using spark is very easy. You can follow the complete walkthrough [here](spark/spark-with-minio.md) or use the [notebook](spark/spark-with-minio.ipynb)
 
 ## Join Community
 
