@@ -6,7 +6,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, LongType, DoubleType, StringType
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-logger = logging.getLogger("MinioSparkJob")
+logger = logging.getLogger("MinIOSparkJob")
 
 spark = SparkSession.builder.getOrCreate()
 
@@ -45,7 +45,7 @@ schema = StructType([
     StructField('improvement_surcharge', DoubleType(), True),
     StructField('total_amount', DoubleType(), True)])
 
-# Read CSV file from Minio
+# Read CSV file from MinIO
 df = spark.read.option("header", "true").schema(schema).csv(
     os.getenv("INPUT_PATH", "s3a://openlake/spark/sample-data/taxi-data.csv"))
 # Filter dataframe based on passenger_count greater than 6

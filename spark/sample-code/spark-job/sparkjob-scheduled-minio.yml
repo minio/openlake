@@ -10,10 +10,10 @@ spec:
         type: Python
         pythonVersion: "3"
         mode: cluster
-        image: "openlake/sparkjob-demo:3.3.1"
+        image: "openlake/sparkjob-demo:3.3.2"
         imagePullPolicy: Always
         mainApplicationFile: local:///app/main.py
-        sparkVersion: "3.3.1"
+        sparkVersion: "3.3.2"
         restartPolicy:
             type: OnFailure
             onFailureRetries: 3
@@ -24,7 +24,7 @@ spec:
             cores: 1
             memory: "1024m"
             labels:
-                version: 3.3.1
+                version: 3.3.2
             serviceAccount: my-release-spark
             env:
                 -   name: AWS_REGION
@@ -38,7 +38,7 @@ spec:
             instances: 3
             memory: "1024m"
             labels:
-                version: 3.3.1
+                version: 3.3.2
             env:
                 -   name: INPUT_PATH
                     value: "s3a://openlake/spark/sample-data/taxi-data.csv"
