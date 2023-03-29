@@ -22,6 +22,7 @@ Before you get started, you will need the following:
 - [Apache Spark](#apache-spark)
    - [Setup Spark on K8s](#setup-spark-on-k8s)
    - [Run Spark Jobs with MinIO as Object Storage](#run-spark-jobs-with-minio-as-object-storage)
+   - [Maintain Iceberg Table using Spark](#maintain-iceberg-table-using-spark)
 
 
 ## Apache Spark
@@ -39,6 +40,9 @@ To run spark jobs on kubernetes we will use [spark-operator](https://github.com/
 
 ### Run Spark Jobs with MinIO as Object Storage
 Reading and writing data from and to MinIO using spark is very easy. You can follow the complete walkthrough [here](spark/spark-with-minio.md) or use the [notebook](spark/spark-with-minio.ipynb)
+
+### Maintain Iceberg Table using Spark
+Apache Iceberg is a table format for huge analytic datasets. It supports ACID transactions, scalable metadata handling, and fast snapshot isolation. You can follow the complete walkthrough using the [notebook](spark/spark-iceberg-minio.ipynb)
 
 ## Join Community
 

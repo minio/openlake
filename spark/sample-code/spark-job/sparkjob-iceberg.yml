@@ -1,0 +1,61 @@
+apiVersion: "sparkoperator.k8s.io/v1beta2"
+kind: SparkApplication
+metadata:
+    name: spark-iceberg
+    namespace: spark-operator
+spec:
+    type: Python
+    pythonVersion: "3"
+    mode: cluster
+    image: "openlake/sparkjob-demo:3.3.2"
+    imagePullPolicy: Always
+    mainApplicationFile: local:///app/main-iceberg.py
+    sparkVersion: "3.3.2"
+    restartPolicy:
+        type: OnFailure
+        onFailureRetries: 3
+        onFailureRetryInterval: 10
+        onSubmissionFailureRetries: 5
+        onSubmissionFailureRetryInterval: 20
+    driver:
+        cores: 1
+        memory: "1024m"
+        labels:
+            version: 3.3.2
+        serviceAccount: my-release-spark
+        env:
+            -   name: AWS_REGION
+                value: us-east-1
+            -   name: AWS_ACCESS_KEY_ID
+                value: openlakeuser
+            -   name: AWS_SECRET_ACCESS_KEY
+                value: openlakeuser
+    executor:
+        cores: 1
+        instances: 3
+        memory: "2048m"
+        labels:
+            version: 3.3.2
+        env:
+            -   name: INPUT_PATH
+                value: "s3a://openlake/spark/sample-data/taxi-data.csv"
+            -   name: AWS_REGION
+                valueFrom:
+                    secretKeyRef:
+                        name: minio-secret
+                        key: AWS_REGION
+            -   name: AWS_ACCESS_KEY_ID
+                valueFrom:
+                    secretKeyRef:
+                        name: minio-secret
+                        key: AWS_ACCESS_KEY_ID
+            -   name: AWS_SECRET_ACCESS_KEY
+                valueFrom:
+                    secretKeyRef:
+                        name: minio-secret
+                        key: AWS_SECRET_ACCESS_KEY
+            -   name: ENDPOINT
+                valueFrom:
+                    secretKeyRef:
+                        name: minio-secret
+                        key: ENDPOINT
