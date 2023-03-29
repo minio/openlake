@@ -23,6 +23,8 @@ Before you get started, you will need the following:
    - [Setup Spark on K8s](#setup-spark-on-k8s)
    - [Run Spark Jobs with MinIO as Object Storage](#run-spark-jobs-with-minio-as-object-storage)
    - [Maintain Iceberg Table using Spark](#maintain-iceberg-table-using-spark)
+- [Dremio](#dremio)
+   - [Setup Dremio on K8s](#setup-dremio-on-k8s)
 
 
 ## Apache Spark
@@ -43,6 +45,15 @@ Reading and writing data from and to MinIO using spark is very easy. You can fol
 
 ### Maintain Iceberg Table using Spark
 Apache Iceberg is a table format for huge analytic datasets. It supports ACID transactions, scalable metadata handling, and fast snapshot isolation. You can follow the complete walkthrough using the [notebook](spark/spark-iceberg-minio.ipynb)
+
+## Dremio
+Dremio is a general purpose engine that enables you to query data from multiple sources, including object stores, relational databases, and data lakes.
+In this section we will cover
+* Setup Dremio on Kubernetes using Helm
+* Run Dremio queries with MinIO as object storage and Iceberg tables
+
+### Setup Dremio on K8s
+To setup Dremio on kubernetes we will use [Helm](https://helm.sh/). You can follow the complete walkthrough using the [notebook](dremio/setup-dremio.ipynb)
 
 ## Join Community
 
