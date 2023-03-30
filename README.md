@@ -25,6 +25,7 @@ Before you get started, you will need the following:
    - [Maintain Iceberg Table using Spark](#maintain-iceberg-table-using-spark)
 - [Dremio](#dremio)
    - [Setup Dremio on K8s](#setup-dremio-on-k8s)
+   - [Access datasets/iceberg tables in MinIO using Dremio](#access-minio-using-dremio)
 
 
 ## Apache Spark
@@ -54,6 +55,9 @@ In this section we will cover
 
 ### Setup Dremio on K8s
 To setup Dremio on kubernetes we will use [Helm](https://helm.sh/). You can follow the complete walkthrough using the [notebook](dremio/setup-dremio.ipynb)
+
+### Access MinIO using Dremio
+You can access datasets or Iceberg tables stored in MinIO using Dremio by adding a new source. You can follow the complete walkthrough using the [notebook](dremio/dremio-minio-iceberg.ipynb)
 
 ## Join Community
 
