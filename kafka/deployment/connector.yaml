@@ -1,0 +1,23 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: "minio-connector"
+  namespace: "kafka"
+  labels:
+    strimzi.io/cluster:
+      connect-cluster
+spec:
+  class: io.confluent.connect.s3.S3SinkConnector
+  config:
+    connector.class: io.confluent.connect.s3.S3SinkConnector
+    task.max: '1'
+    topics: my-topic
+    s3.region: us-east-1
+    s3.bucket.name: openlake-tmp
+    s3.part.size: '5242880'
+    flush.size: '1000'
+    store.url: https://play.min.io:50000
+    storage.class: io.confluent.connect.s3.storage.S3Storage
+    format.class: io.confluent.connect.s3.format.json.JsonFormat
+    partitioner.class: io.confluent.connect.storage.partitioner.DefaultPartitioner
+    behavior.on.null.values: ignore

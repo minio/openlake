@@ -1,0 +1,4 @@
+pandas
+s3fs
+pyarrow
+kafka-python

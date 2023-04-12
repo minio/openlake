@@ -26,6 +26,9 @@ Before you get started, you will need the following:
 - [Dremio](#dremio)
    - [Setup Dremio on K8s](#setup-dremio-on-k8s)
    - [Access datasets/iceberg tables in MinIO using Dremio](#access-minio-using-dremio)
+- [Apache Kafka](#apache-kafka)
+   - [Setup Kafka on K8s](#setup-kafka-on-k8s)
+   - [Store Kafka Topics in MinIO](#store-kafka-topics-in-minio)
 
 
 ## Apache Spark
@@ -58,6 +61,15 @@ To setup Dremio on kubernetes we will use [Helm](https://helm.sh/). You can foll
 
 ### Access MinIO using Dremio
 You can access datasets or Iceberg tables stored in MinIO using Dremio by adding a new source. You can follow the complete walkthrough using the [notebook](dremio/dremio-minio-iceberg.ipynb)
+
+## Apache Kafka
+Apache Kafka is a distributed streaming platform. It is used for building real-time data pipelines and streaming apps. It is horizontally scalable, fault-tolerant, fast, and runs in production in thousands of companies. In this section we will cover how to setup Kafka on Kubernetes and store Kafka topics in MinIO.
+
+### Setup Kafka on K8s
+To setup Kafka on kubernetes we will use [Strimzi](https://strimzi.io/). You can follow the complete walkthrough using the [notebook](kafka/setup-kafka.ipynb)
+
+### Store Kafka Topics in MinIO
+You can store Kafka topics in MinIO using Sink connectors. You can follow the complete walkthrough using the [notebook](kafka/kafka-minio.ipynb)
 
 ## Join Community
 

@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: producer-job
+  namespace: kafka
+spec:
+  template:
+    metadata:
+      name: producer-job
+    spec:
+      containers:
+      - name: producer-job
+        image: openlake/kafka-demo-producer:latest
+      restartPolicy: Never
