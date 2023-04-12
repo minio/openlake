@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: avro-producer-job
+  namespace: kafka
+spec:
+  template:
+    metadata:
+      name: avro-producer-job
+    spec:
+      containers:
+      - name: avro-producer-job
+        image: openlake/kafka-demo-avro-producer:latest
+      restartPolicy: Never

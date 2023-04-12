@@ -29,6 +29,7 @@ Before you get started, you will need the following:
 - [Apache Kafka](#apache-kafka)
    - [Setup Kafka on K8s](#setup-kafka-on-k8s)
    - [Store Kafka Topics in MinIO](#store-kafka-topics-in-minio)
+   - [Kafka Schema Registry and Iceberg Table(experimental)](#kafka-schema-registry)
 
 
 ## Apache Spark
@@ -70,6 +71,9 @@ To setup Kafka on kubernetes we will use [Strimzi](https://strimzi.io/). You can
 
 ### Store Kafka Topics in MinIO
 You can store Kafka topics in MinIO using Sink connectors. You can follow the complete walkthrough using the [notebook](kafka/kafka-minio.ipynb)
+
+### Kafka Schema Registry and Iceberg Table(experimental)
+You can use Kafka Schema Registry to store schemas for data management for kafka topics and you can als use them to create Iceberg tables (expreimental). You can follow the complete walkthrough using the [notebook](kafka/kafka-schema-registry-minio.ipynb)
 
 ## Join Community
 

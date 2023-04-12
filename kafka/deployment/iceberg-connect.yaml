@@ -1,0 +1,75 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnect
+metadata:
+    name: iceberg-connect-cluster
+    namespace: "kafka"
+    annotations:
+        strimzi.io/use-connector-resources: "true"
+spec:
+    version: 3.4.0
+    replicas: 1
+    bootstrapServers: my-kafka-cluster-kafka-bootstrap:9093
+    tls:
+        trustedCertificates:
+            -   secretName: my-kafka-cluster-cluster-ca-cert
+                certificate: ca.crt
+    logging:
+        type: inline
+        loggers:
+            log4j.rootLogger: "ERROR"
+            log4j.logger.com.getindata.kafka.connect.iceberg.sink.IcebergSinkTask: "DEBUG"
+            log4j.logger.org.apache.hadoop.io.compress.CodecPool: "WARN"
+    config:
+        group.id: iceberg-connect-cluster
+        offset.storage.topic: connect-offsets
+        config.storage.topic: connect-configs
+        status.storage.topic: connect-status
+        config.storage.replication.factor: 1
+        offset.storage.replication.factor: 1
+        status.storage.replication.factor: 1
+        config.providers: file,secret,configmap
+        config.providers.file.class: org.apache.kafka.common.config.provider.FileConfigProvider
+        config.providers.secret.class: io.strimzi.kafka.KubernetesSecretConfigProvider
+        config.providers.configmap.class: io.strimzi.kafka.KubernetesConfigMapConfigProvider
+        bootstrap.servers: my-kafka-cluster-kafka-bootstrap:9092
+        key.converter: io.confluent.connect.avro.AvroConverter
+        value.converter: io.confluent.connect.avro.AvroConverter
+        internal.key.converter: org.apache.kafka.connect.json.JsonConverter
+        internal.value.converter: org.apache.kafka.connect.json.JsonConverter
+        key.converter.schemas.enable: false
+        value.converter.schemas.enable: false
+        plugin.path: /opt/kafka/plugins
+        offset.storage.file.filename: /tmp/connect.offsets
+        build:
+            output:
+                type: docker
+                image: <NameOfYourRegistry>
+                pushSecret: <RegistrySecret>
+            plugins:
+                -   name: kafka-avro-converter
+                    artifacts:
+                        -   type: zip
+                            url: https://d1i4a15mxbxib1.cloudfront.net/api/plugins/confluentinc/kafka-connect-avro-converter/versions/7.3.1/confluentinc-kafka-connect-avro-converter-7.3.1.zip
+                -   name: iceberg
+                    artifacts:
+                        -   type: zip
+                            url: https://github.com/getindata/kafka-connect-iceberg-sink/releases/download/0.3.1/kafka-connect-iceberg-sink-0.3.1-plugin.zip
+    resources:
+        requests:
+            cpu: "0.1"
+            memory: 512Mi
+        limits:
+            cpu: "5"
+            memory: 15Gi
+    template:
+        connectContainer:
+            env:
+                # important for using AWS s3 client sdk
+                -   name: AWS_REGION
+                    value: "us-east-1"
+                -   name: AWS_ACCESS_KEY_ID
+                    value: "openlakeuser"
+                -   name: AWS_SECRET_ACCESS_KEY
+                    value: "openlakeuser"
+                -   name: S3_ENDPOINT
+                    value: "https://play.min.io:50000"

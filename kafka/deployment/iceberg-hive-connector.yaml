@@ -1,0 +1,51 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+    name: iceberg-hive-sink-connector
+    namespace: kafka
+    labels:
+        strimzi.io/cluster: my-connect-cluster
+    annotations:
+        strimzi.io/restart: "true"
+spec:
+    class: com.getindata.kafka.connect.iceberg.sink.IcebergSink
+    tasksMax: 1
+    config:
+        task.max: '1'
+        topics: nyc-avro-topic
+        timezone: UTC
+        schema.compatibility: NONE
+        behavior.on.null.values: ignore
+        auto.register.schemas: true
+        schema.registry.url: http://kafka-schema-registry-cp-schema-registry:8081
+        value.converter: io.confluent.connect.avro.AvroConverter
+        key.converter: org.apache.kafka.connect.storage.StringConverter
+        partitioner.class: io.confluent.connect.storage.partitioner.DefaultPartitioner
+        value.converter.schema.registry.url: http://kafka-schema-registry-cp-schema-registry:8081
+        table.namespace: "kafka"
+        table.prefix: "dbz."
+        table.auto-create: true
+        table.write-format: "parquet"
+        iceberg.catalog.default.type: hive
+        iceberg.uri: thrift://metastore-svc:9083 # required for Hive catalog to work
+        iceberg.catalog-impl: "org.apache.iceberg.hive.HiveCatalog"
+        iceberg.table-default.write.data.path: "s3a://openlake-tmp/warehouse/nyc/nyc-taxi-data"
+        iceberg.table-default.write.metadata.path: "s3a://openlake-tmp/warehouse/nyc/nyc-taxi-data/metadata"
+        iceberg.table-default.write.metadata.delete-after-commit.enabled: true
+        iceberg.io-impl: "org.apache.iceberg.aws.s3.S3FileIO"
+        iceberg.engine.hive.enabled: true
+        iceberg.catalog-name: mycatalog
+        iceberg.catalog.default.catalog-impl: org.apache.iceberg.hive.HiveCatalog
+        iceberg.warehouse: "s3a://opentable-tmp/warehouse/nyc"
+        iceberg.fs.defaultFS: "s3a://opentable-tmp"
+        iceberg.fs.s3a.path.style.access: true
+        iceberg.fs.s3a.fast.upload: true
+        iceberg.fs.s3a.fast.upload.buffer: "bytebuffer"
+        iceberg.fs.s3a.endpoint: https://play.min.io:50000
+        iceberg.fs.s3a.access.key: 'openlakeuser'
+        iceberg.fs.s3a.secret.key: 'openlakeuser'
+        iceberg.fs.s3a.connection.ssl.enabled: true
+        receive.buffer.bytes: 20485760
+        fetch.max.bytes: 52428800
+        consumer.override.max.poll.records: 10000
+        offset.storage.file.filename: /tmp/connect.offsets
