@@ -62,6 +62,8 @@ spec:
             cpu: "5"
             memory: 15Gi
     template:
+        pod:
+            tmpDirSizeLimit: "1Gi" # this is required for hive/nessie catalogs to work
         connectContainer:
             env:
                 # important for using AWS s3 client sdk
@@ -73,3 +75,4 @@ spec:
                     value: "openlakeuser"
                 -   name: S3_ENDPOINT
                     value: "https://play.min.io:50000"
+

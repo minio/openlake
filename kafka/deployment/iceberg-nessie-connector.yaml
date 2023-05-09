@@ -23,7 +23,7 @@ spec:
         partitioner.class: io.confluent.connect.storage.partitioner.DefaultPartitioner
         value.converter.schema.registry.url: http://kafka-schema-registry-cp-schema-registry:8081
         table.namespace: "kafka"
-        table.prefix: "dbz."
+        table.prefix: ""
         table.auto-create: true
         table.write-format: "parquet"
         iceberg.uri: http://nessie.nessie-ns.svc:19120/api/v1 # required for Nessie catalog to work
@@ -36,13 +36,13 @@ spec:
         iceberg.catalog.default.catalog-impl: org.apache.iceberg.hive.HiveCatalog
         iceberg.warehouse: "s3a://opentable-tmp/warehouse/nyc"
         iceberg.fs.defaultFS: "s3a://opentable-tmp"
-        iceberg.fs.s3a.path.style.access: true
-        iceberg.fs.s3a.fast.upload: true
-        iceberg.fs.s3a.fast.upload.buffer: "bytebuffer"
-        iceberg.fs.s3a.endpoint: https://play.min.io:50000
-        iceberg.fs.s3a.access.key: 'openlakeuser'
-        iceberg.fs.s3a.secret.key: 'openlakeuser'
-        iceberg.fs.s3a.connection.ssl.enabled: true
+        iceberg.fs.s3.path-style-access: true
+        iceberg.fs.s3.fast.upload: true
+        iceberg.fs.s3.fast.upload.buffer: "bytebuffer"
+        iceberg.fs.s3.endpoint: https://play.min.io:50000
+        iceberg.fs.s3.access-key-id: 'openlakeuser'
+        iceberg.fs.s3.secret-access-key: 'openlakeuser'
+        iceberg.fs.s3.connection.ssl.enabled: true
         receive.buffer.bytes: 20485760
         fetch.max.bytes: 52428800
         consumer.override.max.poll.records: 10000
