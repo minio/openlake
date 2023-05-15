@@ -1,0 +1,45 @@
+apiVersion: "sparkoperator.k8s.io/v1beta2"
+kind: SparkApplication
+metadata:
+  name: spark-stream-optimized
+  namespace: spark-operator
+spec:
+  type: Python
+  pythonVersion: "3"
+  mode: cluster
+  image: "openlake/sparkjob-demo:3.3.2"
+  imagePullPolicy: Always
+  mainApplicationFile: local:///app/main-streaming-optimized.py
+  sparkVersion: "3.3.2"
+  restartPolicy:
+    type: OnFailure
+    onFailureRetries: 1
+    onFailureRetryInterval: 10
+    onSubmissionFailureRetries: 5
+    onSubmissionFailureRetryInterval: 20
+  driver:
+    cores: 3
+    memory: "2048m"
+    labels:
+      version: 3.3.2
+    serviceAccount: my-release-spark
+    env:
+      - name: AWS_REGION
+        value: us-east-1
+      - name: AWS_ACCESS_KEY_ID
+        value: openlakeuser
+      - name: AWS_SECRET_ACCESS_KEY
+        value: openlakeuser
+  executor:
+    cores: 1
+    instances: 10
+    memory: "1024m"
+    labels:
+      version: 3.3.2
+    env:
+      - name: AWS_REGION
+        value: us-east-1
+      - name: AWS_ACCESS_KEY_ID
+        value: openlakeuser
+      - name: AWS_SECRET_ACCESS_KEY
+        value: openlakeuser
