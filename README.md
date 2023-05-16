@@ -29,7 +29,10 @@ Before you get started, you will need the following:
 - [Apache Kafka](#apache-kafka)
    - [Setup Kafka on K8s](#setup-kafka-on-k8s)
    - [Store Kafka Topics in MinIO](#store-kafka-topics-in-minio)
-   - [Kafka Schema Registry and Iceberg Table(experimental)](#kafka-schema-registry)
+   - [Kafka Schema Registry and Iceberg Table (experimental)](#kafka-schema-registry-and-iceberg-table-experimental)
+- [Kafka Spark Structured Streaming](#kafka-spark-structured-streaming)
+   - [Spark Structured Streaming](#spark-structured-streaming)
+   - [End-to-End Spark Structured Streaming for Kafka Topics](#end-to-end-spark-structured-streaming-for-kafka)
 
 
 ## Apache Spark
@@ -72,8 +75,17 @@ To setup Kafka on kubernetes we will use [Strimzi](https://strimzi.io/). You can
 ### Store Kafka Topics in MinIO
 You can store Kafka topics in MinIO using Sink connectors. You can follow the complete walkthrough using the [notebook](kafka/kafka-minio.ipynb)
 
-### Kafka Schema Registry and Iceberg Table(experimental)
+### Kafka Schema Registry and Iceberg Table (experimental)
 You can use Kafka Schema Registry to store schemas for data management for kafka topics and you can als use them to create Iceberg tables (expreimental). You can follow the complete walkthrough using the [notebook](kafka/kafka-schema-registry-minio.ipynb)
+
+## Kafka Spark Structured Streaming
+In this section we will cover how to use Spark Structured Streaming to read data from Kafka topics and write to MinIO.
+
+### Spark Structured Streaming
+Spark Structured Streaming is a scalable and fault-tolerant stream processing engine built on the Spark SQL engine. You can follow the complete walkthrough using the [notebook](spark/spark-streaming.ipynb)
+
+### End-to-End Spark Structured Streaming for Kafka
+You can use Spark Structured Streaming to read data from Kafka topics and write to MinIO. You can follow the complete walkthrough using the [notebook](spark/end-to-end-spark-structured-streaming-kafka.ipynb)
 
 ## Join Community
 
