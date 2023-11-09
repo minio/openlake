@@ -1,5 +1,5 @@
 pandas==2.0.0
 s3fs==2023.4.0
-pyarrow==11.0.0
+pyarrow==14.0.1
 kafka-python==2.0.2
 confluent_kafka[avro]==2.1.0
