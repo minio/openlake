@@ -50,6 +50,8 @@ services:
     image: 'jupyter/pyspark-notebook:spark-3.3.1'
     ports:
       - '8888:8888'
+    environment:
+      - JUPYTER_TOKEN=password
     volumes:
       - ./notebooks:/home/jovyan/
     depends_on:
