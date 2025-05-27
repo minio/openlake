@@ -10,6 +10,7 @@ A Data Lake is a centralized repository that allows you to store all your struct
 
 Before you get started, you will need the following:
 
+
 * A Kubernetes cluster: You will need a Kubernetes cluster to deploy the various tools required for building a Data Lake. If you don't have a Kubernetes cluster, you can set one up using tools like [kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/)/[kind](https://kind.sigs.k8s.io/)/[minikube](https://minikube.sigs.k8s.io/docs/) or a managed Kubernetes service like Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes Service (EKS)
 * [kubectl](https://kubernetes.io/docs/reference/kubectl/): Command line tool for communicating with Kubernetes cluster
 * [A MinIO instance](https://min.io/download#/kubernetes): You will need a MinIO instance to use as the object store for your Data Lake
